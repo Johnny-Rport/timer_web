@@ -1,0 +1,19 @@
+<!doctype>
+<title>Timer App</title>
+<p>This is a timer. Does your cluster work?</p>
+<label id="Timer">burrr.....</label>
+
+<script>
+	function timer()
+	{
+		fetch("/time")
+			.then(response => response.json())
+			.then(data => 
+				{
+					document.getElementById("Timer").innerText = data.time;
+				})
+	}
+
+	setInterval(timer, 1000)
+</script>
+
