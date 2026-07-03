@@ -3,22 +3,45 @@ import time
 
 app = Flask(__name__)
 
-# Recall this is to test a pipeline you're building
-# For versioning, change the if check to have quick checks of whether
-#it works
-# Apparently you can have it run automatically with python
-#   no need for flask run --app main or smoething lik ethat
+# APPLICATION WORKS!!
+# cmdline to test site: flask --app main.py run -p 5000 
+
+start_time = 0
 
 @app.route("/")
 def main():
+    global start_time
+
+    start_time = time.perf_counter_ns()
     return render_template('index.html')
+
 
 @app.route("/time")
 def get_time():
-    x = time.localtime()
-    if(x.tm_sec < 10):
-        result = {"time": f"{x.tm_hour}:{x.tm_min}:0{x.tm_sec}"}
-        return result
-    result = {"time": f"{x.tm_hour}:{x.tm_min}:{x.tm_sec}"}
-    return result
+    x = record_time() 
+    return {"time": f"{x['days']}d {x['hours']:02d}h {x['minutes']:02d}m {x['seconds']:02d}s"}
+
+
+def record_time():
+    # Total elasped is measured in ns
+    final_time = time.perf_counter_ns() - start_time
+    total_ms = final_time // 1_000_000
+    
+    total_seconds = total_ms // 1000
+        
+    seconds = total_seconds % 60
+    total_minutes = total_seconds // 60
+        
+    minutes = total_minutes % 60
+    total_hours = total_minutes // 60
+        
+    hours = total_hours % 24
+    days = total_hours // 24
+
+    return {
+            "days": days,
+            "hours": hours,
+            "minutes": minutes,
+            "seconds": seconds,
+    }
 

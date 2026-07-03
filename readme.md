@@ -14,6 +14,6 @@ deploy on the cluster and access the site from exposed ports on the cluster.
 code and its dependancies. The CD portion will be handled by my cluster using some tool to actually use this container
 and expose the ports and all that sweet stuff to access the page.
 
-* I am using the test server that flask comes with to "simulate" a deployment. However, this gave me an idea to improve
-security since you should NEVER USE TEST SERVERS in production. This gives me a chance to expirement with reverse proxies and tools
-like apache or nginx whenever I come around to that for a graceful and secure deployment. This will be after I get the CI/CD pipeline working. 
+* Without an image, to test the main.py use the following command: `flask --app main.py run -p 5000`, this let's you run
+on a test server without having to rebuild an image everytime. However, within the image itself I choose to use Gunicorn
+to run the flask application as specified within the Dockerfile.

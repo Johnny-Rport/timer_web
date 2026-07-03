@@ -1,7 +1,33 @@
 <!doctype>
-<title>Timer App</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+    <style>
+        /* Center div container */
+        .timer-container {
+            display: flex;
+            justify-content: center; /* Horizontally centers the label */
+            align-items: center;     /* Vertically centers the label */
+            height: 90vh; 
+            text-align: center;
+        }
+
+        /* Timer id */
+        #Timer {
+            font-size: 3.5rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+    </style>
+</head>
+
+
 <p>This is a timer. Does your cluster work?</p>
-<label id="Timer">burrr.....</label>
+<div class="timer-container">
+    <label id="Timer">tick tock tick tock.....</label>
+</div>
+
 
 <script>
 	function timer()
